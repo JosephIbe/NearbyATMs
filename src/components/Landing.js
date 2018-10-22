@@ -55,7 +55,7 @@ export default class Landing extends React.Component {
             return ( <App/> )
         } else if (this.state.shouldShowMainWithProps){
             const { lat, lng } = this.state.mLocation;
-            const isFromLocation = this.state;
+            const isFromLocation = !this.state.isFromLocation;
             return ( <App
                 latitude={lat}
                 longitude={lng}

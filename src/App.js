@@ -10,11 +10,15 @@ class App extends Component {
         atms: [],
         markers: [],
         isMenuOpen: false,
-        apiError: false
+        apiError: false,
+        cityName: 'Silk Board Flyover, Bengaluru'
     };
 
     constructor(props){
         super(props);
+
+        this.fetchCityNameFromCoords = this.fetchCityNameFromCoords.bind(this);
+
     }
 
     componentDidMount() {
@@ -49,7 +53,7 @@ class App extends Component {
                     throw err;
                 });
         } else {
-            // no probs, fetching from silk board
+            // no props, fetching from silk board
 
             fetch(
                 // 'https://api.foursquare.com/v2/venues/search?ll=' + latitude + ',' + longitude +
@@ -87,6 +91,23 @@ class App extends Component {
         console.log(this.state);
     };
 
+    fetchCityNameFromCoords = () => {
+            // + "&key=AIzaSyC1FpwqY0kv0hxQYPtGnn54ag14jHUI6Ow")
+        fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng='
+            + this.props.latitude + "," + this.props.longitude
+            + '&key=AIzaSyBX2kSIO8l9nnIb4mYrVZg7IQRfOeu0Tuo')
+            .then(result => result.json())
+            .then(data => {
+                data.results.map(result => {
+                    const name_city = result[3].formatted_address;
+                    console.log(name_city);
+                    this.setState({
+                        cityName: name_city
+                    });
+                });
+            });
+    };
+
     render() {
 
         let filteredAtms;
@@ -106,7 +127,10 @@ class App extends Component {
 
                         <div className="logoContainer">
                             <h1 tabIndex={0}>Kahan ATM??</h1>
-                            <h3 tabIndex={0}>Silk Board Flyover, Bengaluru</h3>
+                            <h3 tabIndex={0}>
+                                {/*|| 'Silk Board Flyover, Bengaluru'*/}
+                                { this.state.cityName }
+                            </h3>
 
                             <input
                                 type="text"
