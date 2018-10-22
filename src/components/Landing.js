@@ -12,19 +12,16 @@ export default class Landing extends React.Component {
                 lng: ''
             },
             isFromLocation: false,
-            shouldShowMain: false
+            shouldShowMain: false,
+            shouldShowMainWithProps: false
         };
 
     }
 
-    launchMainWithoutProps = () => {
-        return (<App />)
-    };
-
     showAppMain =() => {
         console.log('Silk board clicked');
         this.setState({
-            shouldShowMain: !this.state.shouldShowMain
+            shouldShowMain: !this.state.shouldShowMain // or just set it to true
         })
     };
 
@@ -34,34 +31,36 @@ export default class Landing extends React.Component {
     };
 
     getMyLocation () {
-        if (navigator.geolocation){
-            console.log('Getting Current Location...');
-            window.onload = () => {
-                console.log('win loaded');
-                let startPos;
-                const geoSuccess = (position) => {
-                    startPos = position;
-                    navigator.geolocation.getCurrentPosition(geoSuccess);
-                    console.log(startPos.coords.latitude);
-                    console.log(startPos.coords.longitude);
-                    this.setState({
-                        mLocation: {
-                            lat: startPos.coords.latitude,
-                            lng: startPos.coords.longitude
-                        }
-                    });
-                    console.log(this.state);
-                }
-            }
-        } else {
-            console.log('Cannot Get Current Location...');
+        const location = window.navigator && window.navigator.geolocation;
+        console.log(location);
+
+        if (location) {
+            location.getCurrentPosition( (position) => {
+                this.setState({
+                    mLocation: {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    },
+                    shouldShowMainWithProps: true
+                });
+                console.log(this.state);
+            })
         }
+
     }
 
     render() {
 
         if (this.state.shouldShowMain){
             return ( <App/> )
+        } else if (this.state.shouldShowMainWithProps){
+            const { lat, lng } = this.state.mLocation;
+            const isFromLocation = this.state;
+            return ( <App
+                latitude={lat}
+                longitude={lng}
+                isFromLocation = {isFromLocation}
+            />)
         }
 
         return (

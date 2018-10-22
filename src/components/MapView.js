@@ -3,13 +3,22 @@ import {GoogleMap, Marker, withGoogleMap} from 'react-google-maps';
 
 export default class MapView extends React.Component {
 
-    render() {
-        const Bengaluru = withGoogleMap(props => (
-            <GoogleMap
-                defaultCenter={{lat: 12.917137, lng: 77.622791}}
-                defaultZoom={15}>
+    constructor(props){
+        super(props);
+    }
 
-                {/*{<Marker position={{lat: 12.917137, lng: 77.622791}}/>}*/}
+    render() {
+
+        const { lat, lng } = this.props.defaultCenter;
+        const latitude = lat || 12.917137;
+        const longitude = lng || 77.622791;
+
+        const MyCity = withGoogleMap(props => (
+
+            <GoogleMap
+                // defaultCenter={{lat: 12.917137, lng: 77.622791}}
+                defaultCenter={{lat: latitude, lng: longitude}}
+                defaultZoom={15}>
 
                 {this.props.markers && this.props.markers.map( (marker, index) =>
                     <Marker
@@ -23,7 +32,7 @@ export default class MapView extends React.Component {
 
         return (
 
-                <Bengaluru
+                <MyCity
                     loadingElement={<div style={{ height: `100%` }} />}
                     containerElement={<div style={{ height: `100vh`, width: '100%' }} />}
                     mapElement={<div style={{ height: `100%` }} />}
@@ -37,3 +46,8 @@ export default class MapView extends React.Component {
     }
 
 }
+
+MapView.defaultProps ={
+    lat: 12.917137,
+    lng: 77.622791
+};
