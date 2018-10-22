@@ -1,14 +1,123 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.mainContainer {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.logoContainer {
+    color: white;
+    background-color: steelblue;
+    padding: 10px;
+    margin: 0 0 -20px 0;
+}
+
+h1 {
+    margin: 0 0 5px 0;
+}
+
+h3 {
+    margin: 10px 0 10px 0;
+}
+
+.atmFilter {
+    margin-bottom: 10px;
+}
+
+.mapContainer {
+    width: 75%;
+}
+
+.atmList {
+    padding: 0;
+}
+
+.item-atm {
+    padding: 5px 0;
+    margin: 0;
+    list-style-type: none;
+    border: 1px solid burlywood;
+    color: steelblue;
+    font-size: 1em;
+    font-weight: 600;
+    font-family: "Helvetica";
+}
+
+.item-atm:hover {
+    cursor: pointer;
+}
+
+.containerElement {
+    width: 100%;
+    height: 100vh;
+}
+
+.mapElement {
+    height: 100%;
+}
+
+.landing {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: burlywood;
+}
+
+.centered {
+    margin: auto;
+    width: 300px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    margin-top: 10%;
+}
+
+.introText {
+    text-align: center;
+    padding: 10px;
+}
+
+h3 {
+    font-weight: 800;
+    font-size: 20px;
+    font-family: Verdana;
+}
+
+h5 {
+    color: slategray;
+}
+
+.buttonsLayout {
+    display: inline-block;
+    margin: auto;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*display: inline-grid;*/
+}
+
+button {
+    color: sienna;
+    background-color: cadetblue;
+    border-radius: 10px;
+    border: 1px solid steelblue;
+    margin: 10px;
+    padding: 12px;
+    outline: none;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: lightgray;
 }
